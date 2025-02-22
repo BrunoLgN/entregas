@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.entity.Aluno;
@@ -79,5 +80,65 @@ public class AlunoController {
 		}
 	}
 	
+	@GetMapping("/findByNome")
+	public ResponseEntity<List<Aluno>> findByNome(@RequestParam String nome){
+		try {
+			List<Aluno> lista = this.alunoService.findByNome(nome);
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/findByTurma")
+	public ResponseEntity<List<Aluno>> findByTurma(@RequestParam long idTurma){
+		try {
+			List<Aluno> lista = this.alunoService.findByTurma(idTurma);
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/findByComecoNome/{nome}")
+	public ResponseEntity<List<Aluno>> findByNomeStartingWith(@PathVariable String nome){
+		try {
+			List<Aluno> lista = this.alunoService.findByNomeStartingWith(nome);
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/findByTelefoneContaining/{telefone}")
+	public ResponseEntity<List<Aluno>> findByTelefoneContaining(@PathVariable String telefone){
+		try {
+			List<Aluno> lista = this.alunoService.findByTelefoneContaining(telefone);
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/findByNomeTurma/{nomeTurma}")
+	public ResponseEntity<List<Aluno>> findByNomeTurma(@PathVariable String nomeTurma){
+		try {
+			List<Aluno> lista = this.alunoService.findByNomeTurma(nomeTurma);
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/findByCpf")
+	public ResponseEntity<List<Aluno>> findByCpf(@RequestParam String cpf){
+		try {
+			List<Aluno> lista = this.alunoService.findByCpf(cpf);
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			 e.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 }

@@ -12,7 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,6 +35,7 @@ public class Professor {
 	private Long id;
 	
 	@Pattern(regexp = "^(\\S+\\s+\\S+.*)$")
+	@NotBlank
 	private String nome;
 	
 	@CPF
@@ -44,7 +45,6 @@ public class Professor {
 	private String email;
 	
 	@Pattern(regexp = "^(\\S+\\s+\\S+.*)$")
-	@Null
 	private String especialidade;
 	
 }

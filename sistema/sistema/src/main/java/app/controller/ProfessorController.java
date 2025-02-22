@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import app.entity.Professor;
 import app.service.ProfessorService;
@@ -79,5 +79,36 @@ public class ProfessorController {
 
 		}
 	}
+	
+	@GetMapping("/findByNomeStartingWithOrEspecialidadeStartingWith")
+	public ResponseEntity<List<Professor>> findByNomeStartingWithOrEspecialidadeStartingWith(@RequestParam String nome, String especialidade){
+		try {
+			List<Professor> lista = this.professorService.findByNomeStartingWithOrEspecialidadeStartingWith(nome, especialidade);
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/findByEmailNotContaining")
+	public ResponseEntity<List<Professor>> findByEmailNotContaining(){
+		try {
+			List<Professor> lista = this.professorService.findByEmailNotContaining();
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/findByEmail")
+	public ResponseEntity<List<Professor>> findByEmail(@RequestParam String email){
+		try {
+			List<Professor> lista = this.professorService.findByEmail(email);
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 
 }

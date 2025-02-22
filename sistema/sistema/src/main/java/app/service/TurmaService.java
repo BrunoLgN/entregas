@@ -44,4 +44,20 @@ public class TurmaService {
 		this.turmaRepository.deleteById(id);
 		return "Turma excluido com sucesso";
 	}
+	
+	public List<Turma> findTurmasEntreAnos(int anoInicio, int anoFim){
+		return this.turmaRepository.findTurmasEntreAnos(anoInicio, anoFim);
+	}
+	
+	public List<Turma> findTurmaBySemestreAndAno(int semestre, int ano){
+		return this.turmaRepository.findTurmaBySemestreAndAno(semestre, ano);
+	}
+	
+	public List<Turma> findTurmaByNomeAndTurno(String nome, String turno){
+		return this.turmaRepository.findTurmaByNomeAndTurno(nome, turno);
+	}
+	
+	public List<Turma> findByCursoNome(String nomeCurso){
+		return this.turmaRepository.findByCursoNome(nomeCurso);
+	}
 }

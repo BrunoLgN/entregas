@@ -1,6 +1,5 @@
 package app.entity;
 
-import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -9,8 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,11 +22,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Turma {
 		
-	@OneToMany(mappedBy = "turma")
-	private List<Aluno> alunos;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(nullable = false)
+	@NotNull
 	private Curso curso;
 	
 	

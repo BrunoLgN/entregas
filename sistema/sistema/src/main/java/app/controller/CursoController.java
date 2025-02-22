@@ -78,4 +78,14 @@ public class CursoController {
 
 		}
 	}
+	
+	@GetMapping("/findByNomeIgnoreCase/{nome}")
+	public ResponseEntity<List<Curso>> findByNomeIgnoreCase(@PathVariable String nome){
+		try {
+			List<Curso> lista = this.cursoService.findByNomeIgnoreCase(nome);
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
 }

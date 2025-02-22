@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.entity.Turma;
@@ -76,6 +77,46 @@ public class TurmaController {
 			
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST );
 
+		}
+	}
+	
+	@GetMapping("/findTurmasEntreAnos")
+	public ResponseEntity<List<Turma>> findTurmasEntreAnos(@RequestParam int anoInicio, int anoFim){
+		try {
+			List<Turma> lista = this.turmaService.findTurmasEntreAnos(anoInicio, anoFim);
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/findTurmaBySemestreAndAno")
+	public ResponseEntity<List<Turma>> findTurmaBySemestreAndAno(@RequestParam int semestre, int ano){
+		try {
+			List<Turma> lista = this.turmaService.findTurmaBySemestreAndAno(semestre, ano);
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/findTurmaByNomeAndTurno")
+	public ResponseEntity<List<Turma>> findTurmaByNomeAndTurno(@RequestParam String nome, String turno){
+		try {
+			List<Turma> lista = this.turmaService.findTurmaByNomeAndTurno(nome, turno);
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/findByCursoNome/{cursoNome}")
+	public ResponseEntity<List<Turma>> findByCursoNome(@PathVariable String cursoNome){
+		try {
+			List<Turma> lista = this.turmaService.findByCursoNome(cursoNome);
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
 }

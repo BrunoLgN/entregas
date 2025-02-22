@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +24,7 @@ import lombok.Setter;
 @Entity
 public class Aluno {
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	@JsonIgnoreProperties("alunos")
 	private Turma turma;
 	
@@ -31,12 +32,18 @@ public class Aluno {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Pattern(regexp = "^(\\S+\\s+\\S+.*)$")
+	@Pattern(regexp = "^[\\S]+(\\s+[\\S]+)*$", message = "O nome deve conter pelo menos duas palavras.")
+	@NotBlank
 	private String nome;
+
 	
 	@CPF
+	@NotBlank
 	private String cpf;
+	
 	private String telefone;
+	
+	private Boolean cadastroCompleto;
 	
 	
 }

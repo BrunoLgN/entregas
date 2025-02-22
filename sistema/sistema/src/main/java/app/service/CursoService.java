@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import app.entity.Curso;
 import app.repository.CursoRepository;
 
@@ -43,6 +42,10 @@ public class CursoService {
 	public String delete(Long id) {
 		this.cursoRepository.deleteById(id);
 		return "Curso excluido com sucesso";
+	}
+	
+	public List<Curso> findByNomeIgnoreCase(String nome) {
+		return this.cursoRepository.findByNomeIgnoreCase(nome);
 	}
 
 }
